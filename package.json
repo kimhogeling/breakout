@@ -1,0 +1,21 @@
+{
+  "name": "breakout",
+  "version": "1.0.0",
+  "description": "breakout created with js and electron",
+  "main": "main.js",
+  "scripts": {
+    "start": "./node_modules/.bin/electron main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kimhogeling/breakout.git"
+  },
+  "author": "kimhogeling@gmail.com",
+  "bugs": {
+    "url": "https://github.com/kimhogeling/breakout/issues"
+  },
+  "homepage": "https://github.com/kimhogeling/breakout#readme",
+  "devDependencies": {
+    "electron-prebuilt": "^0.36.0"
+  }
+}
