@@ -7,4 +7,4 @@ Thanks to Electron, this game can be played on any OS: windows, mac and linux. :
 
 1. download and install the internet: `npm install`
 2. start the game: `npm start`
-3. enjoy the game
+3. restart with <cmd> + <r> on mac (or <ctrl> + <r> on windows/linux)
