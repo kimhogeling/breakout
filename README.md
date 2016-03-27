@@ -10,4 +10,4 @@ Thanks to Electron, this game can be played on any OS: windows, mac and linux. :
 
 # controls
 * steer with the left and right arrow keys
-* restart with <cmd> + <r> on mac (or <ctrl> + <r> on windows/linux)
+* restart with `<cmd>` + `<r>` on mac (or `<ctrl>` + `<r>` on windows/linux)
