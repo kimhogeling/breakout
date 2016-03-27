@@ -74,14 +74,22 @@
     document.addEventListener('keyup', keyUpHandler, false)
 
     function keyDownHandler(e) {
-        e.keyCode === 37 && leftPressed = true
-        e.keyCode === 39 && rightPressed = true
+        if (e.keyCode === 37) {
+            leftPressed = true
+        }
+        if (e.keyCode === 39) {
+            rightPressed = true
+        }
     }
 
     // hmmm a bit repeated code here.. :-/
     function keyUpHandler(e) {
-        e.keyCode === 37 && leftPressed = false
-        e.keyCode === 39 && rightPressed = false
+        if (e.keyCode === 37) {
+            leftPressed = false
+        }
+        if (e.keyCode === 39) {
+            rightPressed = false
+        }
     }
 
     // Random is not really random, but just one of those from the colors array
