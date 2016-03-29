@@ -244,8 +244,8 @@
     }
 
     function gameLoop() {
-        var newTimeSinceStart = performance.now(),
-            deltaTime = newTimeSinceStart - oldTimeSinceStart
+        let newTimeSinceStart = performance.now()
+        let deltaTime = newTimeSinceStart - oldTimeSinceStart
 
         // contains the game logic
         draw(deltaTime / 1000)
