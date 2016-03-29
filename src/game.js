@@ -184,19 +184,23 @@
     }
 
     // draw is actually the full game logic loop
-    function draw(deltaTime) {
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
+        drawScore()
+        drawBricks()
+        drawBall()
+        drawPaddle()
+    }
+
+    function gameLoop() {
+        let newTimeSinceStart = performance.now()
+        let deltaTime = (newTimeSinceStart - oldTimeSinceStart) / 1000
+
         if (win === true) {
             drawWin()
             // simple stopping app, because no more requestAnimationFrame is called
             return
         }
-        ctx.clearRect(0, 0, canvas.width, canvas.height)
-
-        // draw stuff
-        drawScore()
-        drawBricks()
-        drawBall()
-        drawPaddle()
 
         // detect if bricks are hit
         collisionDetection()
@@ -241,19 +245,13 @@
         ballY += (speedY * deltaTime)
 
         if (rightPressed && paddleX < canvas.width - paddleWidth) {
-            paddleX += paddleSpeed * deltaTime
+            paddleX += (paddleSpeed * deltaTime)
         } else if (leftPressed && paddleX > 0) {
-            paddleX -= paddleSpeed * deltaTime
+            paddleX -= (paddleSpeed * deltaTime)
         }
 
-    }
-
-    function gameLoop() {
-        let newTimeSinceStart = performance.now()
-        let deltaTime = newTimeSinceStart - oldTimeSinceStart
-
         // contains the game logic
-        draw(deltaTime / 1000)
+        draw()
 
         oldTimeSinceStart = newTimeSinceStart
         requestAnimationFrame(gameLoop)
