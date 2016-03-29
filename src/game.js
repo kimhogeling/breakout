@@ -38,14 +38,16 @@
     let ballY = canvas.height - 30
     const ballColor = randomColor()
 
-    // The speed of the ball
-    let speedX = 3.5
-    let speedY = -3.5
+    // The speed of the ball in px per second
+    let speedX = 200
+    let speedY = -200
 
     const paddleHeight = 10
     const paddleWidth = 75
     let paddleX = (canvas.width - paddleWidth) / 2
     const paddleColor = randomColor()
+    // px per second
+    const paddleSpeed = 360
 
     // This number 25 sucks.. but I need it for detecting, if game is done
     const amountBricks = 25
@@ -67,6 +69,7 @@
         })
     })
 
+    let oldTimeSinceStart
     let rightPressed = false
     let leftPressed = false
 
@@ -176,7 +179,7 @@
     }
 
     // draw is actually the full game logic loop
-    function draw() {
+    function draw(deltaTime) {
         if (win === true) {
             drawWin()
             // simple stopping app, because no more requestAnimationFrame is called
@@ -194,17 +197,17 @@
         collisionDetection()
 
         // detect if left or right border is hit
-        if (ballX + speedX > canvas.width - ballRadius || ballX + speedX < ballRadius) {
+        if (ballX > canvas.width - ballRadius || ballX < ballRadius) {
             speedX = -speedX
         }
 
         // detect if top is hit
-        if (ballY + speedY < ballRadius) {
+        if (ballY < ballRadius) {
             speedY = -speedY
         }
 
         // detect if bottom is hit
-        if (ballY + speedY > canvas.height - ballRadius) {
+        if (ballY > canvas.height - ballRadius) {
             // touch paddle
             if (ballX > paddleX - 10 && ballX < paddleX + paddleWidth + 10) {
                 speedY = -speedY
@@ -221,7 +224,7 @@
                  * The ratio of how precise the center is hit:
                  *  "The difference from the center" / (paddleWidth / 2)
                  */
-                speedX = -(4 * ((paddleX + (paddleWidth / 2) - ballX) / (paddleWidth / 2)))
+                speedX = -(300 * ((paddleX + (paddleWidth / 2) - ballX) / (paddleWidth / 2)))
             } else {
                 drawGameOver()
                 // simple stopping app, because no more requestAnimationFrame is called
@@ -229,19 +232,29 @@
             }
         }
 
-        ballX += speedX
-        ballY += speedY
+        ballX += (speedX * deltaTime)
+        ballY += (speedY * deltaTime)
 
         if (rightPressed && paddleX < canvas.width - paddleWidth) {
-            paddleX += 7
+            paddleX += paddleSpeed * deltaTime
         } else if (leftPressed && paddleX > 0) {
-            paddleX -= 7
+            paddleX -= paddleSpeed * deltaTime
         }
 
-        // this creates the game logic loop
-        requestAnimationFrame(draw)
     }
 
-    requestAnimationFrame(draw)
+    function gameLoop() {
+        var newTimeSinceStart = performance.now(),
+            deltaTime = newTimeSinceStart - oldTimeSinceStart
+
+        // contains the game logic
+        draw(deltaTime / 1000)
+
+        oldTimeSinceStart = newTimeSinceStart
+        requestAnimationFrame(gameLoop)
+    }
+
+    oldTimeSinceStart = performance.now()
+    requestAnimationFrame(gameLoop)
 
 }())
