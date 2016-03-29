@@ -73,8 +73,13 @@
     let rightPressed = false
     let leftPressed = false
 
+    document.addEventListener('mousemove', mouseMoveHandler, false)
     document.addEventListener('keydown', keyDownHandler, false)
     document.addEventListener('keyup', keyUpHandler, false)
+
+    function mouseMoveHandler(e) {
+        paddleX = e.clientX - (paddleWidth / 2);
+    }
 
     function keyDownHandler(e) {
         if (e.keyCode === 37) {
