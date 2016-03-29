@@ -216,7 +216,7 @@
                  * the ball can be directed.
                  *
                  * Strength of the effect.. don't like this yet..:
-                 *  4
+                 *  300
                  * Center of paddle:
                  *  paddleX + (paddleWidth / 2)
                  * The difference from the center:
